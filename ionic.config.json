@@ -1,0 +1,7 @@
+{
+  "name": "Empana",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
