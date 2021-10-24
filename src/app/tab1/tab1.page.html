@@ -1,17 +1,111 @@
+<!--<ion-header collapse="condense" class="sombra">
+  <ion-toolbar> 
+    <ion-title style="color:#2c4384;font-weight: 700;">Disonex</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon style="color: black;" slot="icon-only" ios="person-outline" md="person-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+-->
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
+  <ion-toolbar style="color:#483E85;">
+    <ion-title style="font-weight: 700;">
+      <img style="height: 30px;" src="/assets/login/logo_preLogin.png">
     </ion-title>
+    <ion-buttons slot="start" >
+      <ion-button (click)="navegar('/configuracion')">
+        <ion-icon style="font-size: 25px; color: #483E85;" name="md-help"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end" >
+        <ion-button (click)="navegar('/configuracion')">
+          <ion-icon style="font-size: 25px; color: #483E85;" name="md-profile"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+
+
+<ion-content [fullscreen]="true" style="margin-right: 10px; margin-left: 10px;" style="padding: 0;">
+    <ion-refresher slot="fixed" (ionRefresh)="cargarpag($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid >
+    <ion-row >
+      <ion-col size="10" style="padding: 0;"> 
+        <ion-searchbar *ngIf="!status_search && status_product && !status_scansid" [(ngModel)]="searchTerm" style="--background:white;" showCancelButton="never" animated placeholder="Buscar" (search)="yourSearchFunction($event.target.value)" (ionCancel)="cargarpag()" (ionClear)="cargarpag()"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2" style="padding: 0; padding-top: 5px; text-align: center;">
+        <ion-button style="--background:transparent; color:#483E85; height: 80%;" (click)='presentActionSheet()' >
+          <ion-icon slot="icon-only" name="md-filtro"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid> 
+    <ion-row>
+      <ion-col *ngIf="paginas.length == 0" size="12" class="ion-text-center">
+        <p style="margin: 42px 0 42px 0;">No hay documentos registrados.</p>
+      </ion-col>
+      <ion-col *ngFor="let item of paginas" size="6" style="padding: 0;" >
+        <ion-card button class="ion-no-margin card-documents" style=" background-color: white; margin-left: 8px; margin-right: 8px; margin-bottom: 12px;">
+          <ion-avatar *ngIf="item.id_company" style="right: 0; position: absolute; margin: 8px;">
+            <img src="https://disonex.virtual-tec.club/storage/app/photos-companies/{{item.url_company}}">
+          </ion-avatar>
+          <!-- Empresas -->
+          <img *ngIf="!status_product" src="https://disonex.virtual-tec.club/storage/app/photos-companies/{{item.url_company}}" class="img-cards" (load)="item.loaded = true" [hidden]="!item.loaded" />
+          <!-- Scans -->
+          <img *ngIf="status_product" [src]="'https://disonex.virtual-tec.club/storage/app/user-scan/'+item.image" class="img-cards" (click)="navegar('/pagedetail/'+item.id)" (load)="item.loaded = true" [hidden]="!item.loaded" />
+          <img src="/assets/sample-placeholder.gif" [hidden]="item.loaded">
+          <ion-card-header style="padding: 10px;">
+            <ion-card-subtitle>{{item.created_at}}</ion-card-subtitle>
+            <ion-card-title [style.color]="'#95B63F'" style="font-size: 14px; text-align: justify;font-weight: 600;">
+              {{item.name}}
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content style="padding: 0 10px 0 10px;">
+            <p *ngIf="item.id_company">Por: {{item.name_company}}</p>
+            <p *ngIf="!item.id_company"><br></p>
+          </ion-card-content>
+          <ion-row> 
+            <ion-col class="ion-text-start">
+              <ion-button *ngIf="status_product" color="primary" size="small" fill="clear" (click)="navegar('/pagedetail/'+item.id)">
+               {{'Ver_mas' | translate }}
+              </ion-button> 
+              <ion-button *ngIf="!status_product" color="primary" size="small" fill="clear" (click)="viewScansId(item.id)">
+                {{'Ver_Scans' | translate }}
+               </ion-button>
+              <ion-button *ngIf="status_product" (click)="deletePage(item)" shape="round" color="danger" size="small" fill="clear">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="cargarpag2($event)">
+    <ion-infinite-scroll-content *ngIf="!status_search && status_product && !status_scansid"
+      loadingSpinner="crescent"
+      loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+<!--   <ion-button expand="block" fill="outline" (click)="addPhotoToGallery()">
+    Escanear
+  </ion-button>
+  texto escaneado: {{texto}}
+
+  <img src="{{imgfoto}}" *ngIf="imgfoto">
+ -->
 </ion-content>

@@ -1,17 +1,140 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
+    <ion-title style="font-weight: 700;">
+      <img style="height: 30px;" src="/assets/login/logo_preLogin.png">
     </ion-title>
+    <!--
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon style="color: black;" slot="icon-only" ios="person-outline" md="person-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    -->
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content >
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-item>
+    <ion-label position="floating">{{'Fecha_Inicio' | translate }}</ion-label>
+    <ion-datetime displayFormat="D MMM YYYY H:mm" min="2020" max="2022" [(ngModel)]="mydate" ></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">{{'Fecha_Fin' | translate }}</ion-label>
+    <ion-datetime displayFormat="D MMM YYYY H:mm" min="2020" max="2022" [(ngModel)]="mydatef"  ></ion-datetime>
+  </ion-item>
+
+  <ion-button (click)="filtrarinfo()" expand="full" fill="outline">
+    <ion-icon name="edit"> </ion-icon>
+    {{'FILTRAR' | translate }}
+  </ion-button>
+  <ion-button (click)="this.lista_agendados=[];cargartareas()" expand="full" fill="outline">
+    <ion-icon name="edit"> </ion-icon>
+    {{'Limpiar_filtros' | translate }}
+  </ion-button>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of lista_agendados" size="12" >
+        <ion-card  style="margin-top: 2px !important;" style="background-color: white;" >
+          <ion-card-content style="padding: 0px;margin-bottom: -5px;">
+            <ion-row >
+
+
+              <ion-col size="12">
+                <p  style="text-align:left ;font-weight: 600;color: #95B63F;">
+                  {{item.month}} {{item.year}}
+                 </p>
+               </ion-col>
+        
+            </ion-row>
+            <ion-row  *ngFor="let tarea of item.tareas">
+              <ion-col size="3"  style="text-align: center;">
+                <span style="font-size: 30px;" >
+                  {{fecha(tarea.startDate,2)}} 
+                </span>
+              </ion-col>
+              <ion-col size="9" style="text-align: left;">
+                <label class="tittle" >
+                  {{tarea.title?.substring(10)}} 
+                </label>
+                <p  class="fecha">
+                  {{fecha(tarea.startDate)}} - {{fecha(tarea.endDate)}} 
+                </p>
+              </ion-col>
+            </ion-row>
+      
+            <ion-row  *ngIf="item.tareas.length==0">
+              <ion-col size="12"  style="text-align: center;">
+                <span style="font-size: 10px;">
+                  {{'Sin_informacion' | translate }}
+                </span>
+              </ion-col>
+            </ion-row>
+      
+        
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+<!-- 
+  <ion-item>
+    <ion-label position="floating">Titulo</ion-label>
+    <ion-input [(ngModel)]="titulo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Notas</ion-label>
+    <ion-input [(ngModel)]="notes"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">localizacion</ion-label>
+    <ion-input [(ngModel)]="localizacion"></ion-input>
+  </ion-item>
+    
+  <ion-item>
+    <ion-label position="floating">id</ion-label>
+    <ion-input [(ngModel)]="id"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Opciones</ion-label>
+    <ion-select placeholder="Opciones" [(ngModel)]="opcion">
+      <ion-select-option *ngFor="let item of [0,1,2,3,4,5,6,7,8,9,10]" [value]="item">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  
+  <ion-item>
+    <ion-label position="floating">Fecha Inicio</ion-label>
+    <ion-datetime displayFormat="D MMM YYYY H:mm" min="2020" max="2022" [(ngModel)]="mydate" ></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Fecha Fin</ion-label>
+    <ion-datetime displayFormat="D MMM YYYY H:mm" min="2020" max="2022" [(ngModel)]="mydatef"  ></ion-datetime>
+  </ion-item>
+
+
+  <br>
+
+  <ion-input placeholder="Nombre de la imagen" [(ngModel)]="name"></ion-input>
+  <ion-button (click)="crearporopcion()" expand="full" fill="outline">
+    <ion-icon name="edit"> </ion-icon>
+    cargar opcion
+  </ion-button>
+
+
+ -->
+
 </ion-content>

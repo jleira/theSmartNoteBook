@@ -1,6 +1,14 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "Empana",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "com.virtualtec.disonex",
+  "appName": "The Smart Notebook",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "GoogleAuth": {
+      "scopes": ["profile", "email","https://www.googleapis.com/auth/drive"],
+      "serverClientId": "251619330910-a07untcmegbfiujg2337lt33jj8ccl2v.apps.googleusercontent.com",
+      "forceCodeForRefreshToken" : true
+    }
+  }
+
 }

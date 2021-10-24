@@ -1,0 +1,161 @@
+<ion-header style="background: #f0f0f0;" class="ion-no-border">
+  <ion-row class="mt6">
+    <ion-col size="10" offset="1">
+      <img style="width: 100%;"  src="/assets/login/logo_preLogin.png">
+    </ion-col>
+  </ion-row>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngIf="part2">
+    <ion-col size="4" offset="4">
+      <img src="/assets/login/cumple.png">
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="part3">
+    <ion-col size="4" offset="4">
+      <img src="/assets/login/point.png">
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="part4">
+    <ion-col size="4" offset="4" class="text-center">
+        {{'YO_SOY' | translate}}
+    </ion-col>
+  </ion-row>
+
+
+  <div>
+    <div *ngIf="part1">
+      <ion-item style="margin-top:5px;margin-left: 10px;" class="ion-no-padding">
+        <div class="divitem">
+          <ion-label position="floating" class="ion-text-wrap">{{'NOMBRE' | translate}}</ion-label>
+          <ion-input [(ngModel)]="usuarioext.name" style="border-radius: 10px;" type="text"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item style="margin-top:5px;margin-left: 10px;" class="ion-no-padding">
+        <div class="divitem">
+          <ion-label position="floating" class="ion-text-wrap">{{'CORREO_ELECTRONICO' | translate}}</ion-label>
+          <ion-input [(ngModel)]="usuarioext.email" style="border-radius: 10px;" type="text"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item style="margin-top:5px;margin-left: 10px;" class="ion-no-padding">
+        <div class="divitem">
+          <ion-label position="floating" class="ion-text-wrap">{{'CONTRASENA' | translate}}</ion-label>
+          <ion-input [(ngModel)]="usuarioext.password" style="border-radius: 10px;" type="password"></ion-input>
+        </div>
+      </ion-item>
+
+
+    </div>
+    <div *ngIf="part2">
+
+      <ion-item>
+        <ion-label position="floating">{{'Mi_Cumple' | translate}}</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="1930-03-14" max="2021-12-12" [(ngModel)]="usuarioext.fecha" cancelText="{{'cancelar' | translate}}" doneText="{{'hecho' | translate}}"></ion-datetime>
+      </ion-item>
+    
+    </div>
+
+
+    <div *ngIf="part3">
+
+      <ion-item>
+        <ion-label position="floating">{{'Pais' | translate}}</ion-label>
+        <ion-select placeholder="{{'Seleccione pais' | translate}}" interface="action-sheet" cancelText="{{'cancelar' | translate}}" doneText="{{'hecho' | translate}}" [(ngModel)]="usuarioext.departamento">
+          <ion-select-option *ngFor="let item of departamentos" [value]="item.id_departamento">{{item.departamento}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="floating">{{'Ciudad' | translate}}</ion-label>
+        <ion-input [(ngModel)]="usuarioext.ciudad" type="text"></ion-input>
+      </ion-item>
+    
+      
+    </div>
+
+
+    <div *ngIf="part4">
+
+      <ion-row >
+        <ion-col size="4" offset="1" (click)="usuarioext.profile=1" [ngClass]="{'selected_type': usuarioext.profile==1}" class="no_selected_type">
+          <img src="/assets/login/icon-1.png">
+          <p>
+            {{'PROFESOR' | translate}} 
+          </p>
+        </ion-col>
+        <ion-col size="4" offset="2" (click)="usuarioext.profile=2" [ngClass]="{'selected_type': usuarioext.profile==2}" class="no_selected_type">
+          <img src="/assets/login/icon-2.png">
+          <p>
+            {{'ESTUDIANTE' | translate}} 
+          </p>
+
+        </ion-col>
+      
+      </ion-row>
+      <ion-row >
+        <ion-col size="4" offset="1" (click)="usuarioext.profile=3" [ngClass]="{'selected_type': usuarioext.profile==3}" class="no_selected_type">
+          <img src="/assets/login/icon-3.png" >
+          <p>
+            {{'CREATIVO' | translate}} 
+          </p>
+
+        </ion-col>
+        <ion-col size="4" offset="2" (click)="usuarioext.profile=4" [ngClass]="{'selected_type': usuarioext.profile==4}" class="no_selected_type">
+          <img src="/assets/login/icon-4.png" >
+          <p>
+            {{'TRABAJADOR' | translate}}
+          </p>
+
+        </ion-col>
+      
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="4" offset="4"  (click)="usuarioext.profile=5" [ngClass]="{'selected_type': usuarioext.profile==5}" class="no_selected_type">
+
+          {{'OTRO' | translate}}
+
+        </ion-col>
+        
+      </ion-row>
+      
+    </div>
+
+  </div>
+
+  <div>
+    <ion-row class="ion-justify-content-center">
+      <ion-col *ngIf="usuarioext.profile==5 && part4" size="4">
+        <ion-item>
+          <ion-label position="floating">{{'Nombre' | translate}}</ion-label>
+          <ion-input [(ngModel)]="usuarioext.otro" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col *ngIf="part3 || part4" size="4" class="ion-margin-top">
+        <ion-button expand="block" (click)="atras()" color="medium" size="default" >
+          {{'Atras' | translate}}
+        </ion-button>
+      </ion-col>
+      <ion-col size="4" class="ion-margin-top">
+        <ion-button expand="block" (click)="siguiente()" size="default">
+          {{'SIGUIENTE' | translate}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="containerfooter">
+    <img src="/assets/login/footer.png" style="margin-bottom: -5px;background-color: #f0f0f0;">
+    <div class="centeredfooter">
+    </div>
+  </div>
+</ion-footer>

@@ -1,0 +1,144 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="color:#2c4384;">
+    <ion-title style="font-weight: 700;">
+      <img style="height: 40px;" src="/assets/login/logo_preLogin.png">
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="navegar('/configuracion')">
+        <ion-icon style="font-size: 25px;" slot="icon-only" ios="ios-profile" md="md-profile"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-row >
+      <ion-col size="12">
+          <p   style="font-size: 16px; text-align: justify;font-weight: 600;  margin-left: 12px; margin-right: 12px;" >
+            {{'¡Hola' | translate }} , {{data_consulta?.name}}!
+          </p>
+          <p   style="font-size: 14px; text-align: justify;  margin-left: 12px; margin-right: 12px;" >
+              
+              {{'Desde_aqui_puedes_configurar_tus_atajo' | translate }}
+          </p>
+      </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card button class="ion-no-margin" color="segundario" (click)="Presentopciones(1)">
+        <ion-card-content class="ion-no-margin">
+          <ion-icon name="md-sol" style="font-size: 4rem;"></ion-icon>
+          <ion-row>
+            <ion-col size="12">
+              <p>
+                {{accion(botones[0]?.accion, botones[0]?.type_save)}}
+              </p>
+            </ion-col>
+            <ion-col size="12">
+              <p style="font-size: 12px;" >
+                {{botones[0]?.accion==1?botones[0]?.email:''}} 
+                {{botones[0]?.accion==2?stringNube(botones[0]):''}} 
+                {{botones[0]?.accion==3?stringRedSocial(botones[0]):''}} 
+              </p>
+            </ion-col>
+          </ion-row>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card button color="segundario" (click)="Presentopciones(2)">
+        <ion-card-content>
+          <ion-icon name="heart" style="font-size: 4rem;"></ion-icon>
+          <ion-row>
+            <ion-col size="12">
+              <p>
+                {{accion(botones[1]?.accion, botones[1]?.type_save)}}
+              </p>
+            </ion-col>
+            <ion-col size="12">
+              <p style="font-size: 12px;" >
+                {{botones[1]?.accion==1?botones[1]?.email:''}} 
+                {{botones[1]?.accion==2?stringNube(botones[1]):''}} 
+                {{botones[1]?.accion==3?stringRedSocial(botones[1]):''}}
+              </p>
+            </ion-col>
+          </ion-row>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card button color="segundario" (click)="Presentopciones(3)">
+        <ion-card-content>
+          <ion-icon name="md-foco" style="font-size: 4rem;"></ion-icon>
+          <ion-row>
+            <ion-col size="12">
+              <p>
+                {{accion(botones[2]?.accion, botones[2]?.type_save)}}
+              </p>
+            </ion-col>
+            <ion-col size="12">
+              <p style="font-size: 12px;" >
+                {{botones[2]?.accion==1?botones[2]?.email:''}} 
+                {{botones[2]?.accion==2?stringNube(botones[2]):''}} 
+                {{botones[2]?.accion==3?stringRedSocial(botones[2]):''}}
+              </p>
+            </ion-col>
+          </ion-row>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card button color="segundario" (click)="Presentopciones(4)">
+        <ion-card-content>
+          <ion-icon name="md-reloj" style="font-size: 4rem;"></ion-icon>
+          <ion-row>
+            <ion-col size="12">
+              <p >
+                {{accion(botones[3]?.accion, botones[3]?.type_save)}}
+              </p>
+            </ion-col>
+            <ion-col size="12">
+              <p style="font-size: 12px;" >
+                {{botones[3]?.accion==1?botones[3]?.email:''}} 
+                {{botones[3]?.accion==2?stringNube(botones[3]):''}} 
+                {{botones[3]?.accion==3?stringRedSocial(botones[3]):''}}
+              </p>
+            </ion-col>
+          </ion-row>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card button color="segundario" (click)="Presentopciones(5)" >
+        <ion-card-content>
+          <ion-icon name="md-monitor" style="font-size: 4rem;"></ion-icon>
+          <ion-row>
+            <ion-col size="12">
+              <p>
+                {{accion(botones[4]?.accion, botones[4]?.type_save)}}
+              </p>
+            </ion-col>
+            <ion-col size="12">
+              <p style="font-size: 12px;" >
+                {{botones[4]?.accion==1?botones[4]?.email:''}} 
+                {{botones[4]?.accion==2?stringNube(botones[4]):''}} 
+                {{botones[4]?.accion==3?stringRedSocial(botones[4]):''}}
+              </p>
+            </ion-col>
+          </ion-row>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+
+</ion-content>

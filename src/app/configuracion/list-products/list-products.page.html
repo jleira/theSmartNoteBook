@@ -1,0 +1,53 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title style="color:#2c4384;font-weight: 700;">{{'Mis_productos' | translate}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" md="arrow-back-outline" ios="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding-top ion-padding-bottom">
+  <ion-refresher slot="fixed" (ionRefresh)="loadData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid> 
+    <ion-row>
+      <ion-col *ngIf="paginas.length == 0" size="12" class="ion-text-center">
+        <p style="margin: 42px 0 42px 0;">{{'No_hay_productos_registrados' | translate}}.</p>
+      </ion-col>
+      <ion-col *ngFor="let item of paginas" size="6" style="padding: 0;" >
+        <ion-card button class="ion-no-margin card-documents" style=" background-color: white; margin-left: 8px; margin-right: 8px; margin-bottom: 12px;">
+          <ion-avatar *ngIf="item.id_company" style="right: 0; position: absolute; margin: 8px;">
+            <img src="https://disonex.virtual-tec.club/storage/app/photos-companies/{{item.url_company}}">
+          </ion-avatar>
+          <img [src]="'/assets/diary.jpg'" class="img-cards" (click)="detailsProduct(item)" (load)="item.loaded = true" [hidden]="!item.loaded" />
+          <img src="/assets/sample-placeholder.gif" [hidden]="item.loaded">
+          <ion-card-header style="padding: 10px;">
+            <ion-card-subtitle>{{item.created_at}}</ion-card-subtitle>
+            <ion-card-title [style.color]="'#95B63F'" style="font-size: 14px; text-align: justify;font-weight: 600;">
+              {{item.name}}
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content style="padding: 0 10px 0 10px;">
+            <p *ngIf="item.id_company">{{'por' | translate}}: {{item.name_company}}</p>
+            <p *ngIf="!item.id_company"><br></p>
+          </ion-card-content>
+          <ion-row> 
+            <ion-col class="ion-text-start">
+              <ion-button color="primary" size="small" fill="clear" (click)="detailsProduct(item)">
+                
+                {{'Ver_mas' | translate}}
+              </ion-button> 
+              <ion-button *ngIf="status_product" (click)="deletePage(item)" shape="round" color="danger" size="small" fill="clear">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

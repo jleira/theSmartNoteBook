@@ -1,0 +1,62 @@
+
+<ion-content fullscreen="true" scroll-y="false">
+
+  <ion-row class="mt7">
+    <ion-col size="10" offset="1">
+      <img style="width: 100%;"  src="/assets/login/logo_preLogin.png">
+    </ion-col>
+  </ion-row>
+
+
+  <div style="width: 100%;position: absolute;bottom: 5%;">
+
+    <ion-button expand="block" style="width: 84%;margin-left: 8%;--background:#494189" (click)="registro()">
+      {{'REGISTRO_INTERNO' | translate}} </ion-button>
+      <br>
+
+      <ion-button size="default" *ngIf="isios" expand="block" (click)="loginIos()" style="--background:black;">
+        <ion-icon slot="start" name="logo-apple"></ion-icon>
+        {{'INGRESAR_IOS' | translate}}
+      </ion-button>
+      <br *ngIf="isios">
+
+    <ion-button expand="block" (click)="loginGoogle()" style="width: 84%;margin-left: 8%;--background:#E04A39">
+      <ion-icon slot="start" name="logo-google"></ion-icon>
+      {{'REGISTRO_GOOGLE' | translate}}
+    </ion-button>
+    <br>
+    <ion-button  expand="block" (click)="signInfb()" style="width: 84%;margin-left: 8%;--background:#1977F1">
+      <ion-icon  slot="start" name="logo-facebook"></ion-icon>
+      {{'REGISTRO_FACEBBOK' | translate}}
+    </ion-button>
+    <!-- <br>
+    <ion-button expand="block" (click)="buscarqr()" style="width: 84%;margin-left: 8%;--background:#273A7E">
+      {{'fuck cache x2' | translate}}
+    </ion-button>
+    <br>
+    <ion-button expand="block" (click)="addPhotoToGallery()" style="width: 84%;margin-left: 8%;--background:#273A7E">
+      {{'vamosconlaimagen' | translate}}
+    </ion-button>
+    <br>
+
+    <ion-button expand="block" (click)="buscarqr3()" style="width: 84%;margin-left: 8%;--background:#273A7E">
+      {{'vamosconlaimagen3' | translate}}
+    </ion-button>
+    <br> -->
+
+  </div>
+
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <div class="containerfooter">
+      <img src="/assets/login/footer.png"style="margin-bottom: -5px;background-color: #f0f0f0;">
+      <div class="centeredfooter">
+        <ion-button expand="block" class="botonstyle2" (click)="signIn()" style="width: 85%;margin-left: 6%;color:gray">
+          <ion-icon slot="start" name="logo-facebook"></ion-icon>
+          {{'Ya_tienes_cuenta?' | translate}} &nbsp; <strong>{{'INICIA_SESION' | translate}}</strong>
+        </ion-button>
+      </div> 
+    </div>
+</ion-footer>

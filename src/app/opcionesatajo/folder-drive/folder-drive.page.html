@@ -1,0 +1,31 @@
+<ion-header translucent>
+  <ion-toolbar style="color:#2c4384;">
+    <ion-title>{{'Cambiar_carpeta_Drive' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <ion-list>
+    <ion-list-header lines="full">
+      <ion-label>
+        {{'Ruta_principal' | translate}}
+      </ion-label>
+    </ion-list-header>
+    <!-- <ion-item button (click)="create_google_folder()">
+      <ion-icon slot="start" name="plus"></ion-icon>
+      <ion-label>Testear</ion-label>
+    </ion-item> -->
+    <ion-item button *ngFor="let item of dataFiles" (click)="selectedFolder(item)">
+      <ion-icon *ngIf="item.mimeType == 'application/vnd.google-apps.folder'" slot="start" name="folder"></ion-icon>
+      <ion-label>{{ item.name }}</ion-label>
+    </ion-item>
+    <ion-item lines="none" *ngIf="dataFiles.length == 0">
+      <ion-label>{{'No_hay_carpetas' | translate}}.</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-weight: 700;">
+        <img style="height: 30px;" src="/assets/login/logo_preLogin.png">
+      </ion-title>
+    
+    <ion-buttons slot="end" >
+        <ion-button (click)="salir()">
+          <ion-icon style="font-size: 22px; color: #483E85;" name="md-close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card style="background: white;">
+    <ion-card-header style="text-align: center;">
+      <ion-button style="position: absolute;right: 0;margin-right: 15px;z-index: 10;" size="small" fill="clear" (click)="modalEdit()">
+        <ion-icon slot="icon-only" name="md-edit" style="color: #483E85;"></ion-icon>
+      </ion-button>
+      <ion-card-title style="color:#483E85">{{ data_consulta?.name }}</ion-card-title>
+      <ion-card-subtitle>{{data_consulta?.profile}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="6" style="text-align: center;">
+          <ion-text>
+            <p style="color:#483E85; font-weight: 600;">{{ data_consulta?.product_active }}</p>
+          </ion-text>
+          <ion-text>
+            <p>{{'Productos' | translate}}</p>
+          </ion-text>
+        </ion-col>
+        <ion-col size="6" style="text-align: center;">
+          <ion-text>
+            <p style="color:#483E85; font-weight: 600;">{{ data_consulta?.scan_active }}</p>
+          </ion-text>
+          <ion-text>
+            <p>{{'Scaneos' | translate }}</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-row>
+    <ion-col size="6">
+      <ion-card button color="light" (click)="addProduct()">
+        <ion-card-content class="ion-no-margin" style="text-align: center;">
+          <ion-icon name="md-addproduct" style="font-size: 4rem;"></ion-icon>
+          <ion-card-header style="text-align: center; padding: 6px;">
+            <ion-card-subtitle class="ion-no-margin" style="color:gray;">{{'Agregar_Producto' | translate }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>  
+    <ion-col size="6">
+      <ion-card button color="light" (click)="listProducts()">
+        <ion-card-content class="ion-no-margin" style="text-align: center;">
+          <ion-icon name="md-listproducts" style="font-size: 4rem;"></ion-icon>
+          <ion-card-header style="text-align: center; padding: 6px;">
+            <ion-card-subtitle class="ion-no-margin" style="color:gray;">{{'Ver_Productos' | translate }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>  
+  </ion-row>
+</ion-content>

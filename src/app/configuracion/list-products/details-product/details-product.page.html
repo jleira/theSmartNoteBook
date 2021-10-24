@@ -1,0 +1,44 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title style="color:#2c4384;font-weight: 700;">{{'Detalles_del_producto' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding-top ion-padding-bottom">
+  <ion-card button class="ion-no-margin card-documents" style=" background-color: white; margin-left: 8px; margin-right: 8px; margin-bottom: 12px;">
+    <ion-card-content style="padding: 0 10px 0 10px;">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="5">
+            <ion-avatar *ngIf="product.id_company" style="right: 0; position: absolute; margin: 8px;">
+              <img src="https://disonex.virtual-tec.club/storage/app/photos-companies/{{product.url_company}}">
+            </ion-avatar>
+            <img [src]="'/assets/diary.jpg'" class="img-cards" (click)="detailsProduct(item)" (load)="product.loaded = true" [hidden]="!product.loaded" />
+            <img src="/assets/sample-placeholder.gif" [hidden]="product.loaded">
+          </ion-col>
+          <ion-col size="7">
+            <ion-card-header style="padding: 10px;">
+              <ion-card-subtitle>{{product.created_at}}</ion-card-subtitle>
+              <ion-card-title [style.color]="'#95B63F'" style="font-size: 14px; text-align: justify;font-weight: 600;">
+                Por: {{product.name_company}}
+              </ion-card-title>
+            </ion-card-header>
+            <div style="padding: 10px;">
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    
+  </ion-card>
+  <div class="ion-text-center">
+    <ion-button (click)="navegar('/tabs/tab1/'+product.id)" size="default" color="light" expand="block">
+      {{'Ver_Scans' | translate}}
+    </ion-button>
+  </div>
+</ion-content>

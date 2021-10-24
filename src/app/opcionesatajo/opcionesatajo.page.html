@@ -1,0 +1,164 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="color:#2c4384;">
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon style="font-size: 25px;" slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <!-- <img style="height: 40px;" src="/assets/login/logo_preLogin.png"> -->
+
+      {{'Opciones_atajo' | translate}}
+    </ion-title>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card button class="ion-no-margin ion-margin-bottom" color="segundario">
+    <ion-card-header>
+      <ion-button *ngIf="botones?.accion" style="position: absolute;right: 0;margin-right: 15px;z-index: 10;" size="small" fill="clear" (click)="deleteAction()">
+        <ion-icon slot="icon-only" name="trash-outline" color="danger"></ion-icon>
+      </ion-button>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center">
+      <ion-icon *ngIf="boton==1" name="md-sol" style="font-size: 4rem;"></ion-icon>
+      <ion-icon *ngIf="boton==2" name="heart" style="font-size: 4rem;"></ion-icon>
+      <ion-icon *ngIf="boton==3" name="md-foco" style="font-size: 4rem;"></ion-icon>
+      <ion-icon *ngIf="boton==4" name="md-reloj" style="font-size: 4rem;"></ion-icon>
+      <ion-icon *ngIf="boton==5" name="md-monitor" style="font-size: 4rem;"></ion-icon>
+      <ion-row>
+        <ion-col size="12">
+          <p>
+            {{accion(botones?.accion, botones?.type_save)}}
+          </p>
+        </ion-col>
+        <ion-col size="12">
+          <p style="font-size: 12px;" >
+            {{botones?.accion==1?botones?.email:''}} 
+            {{botones?.accion==2?stringNube(botones):''}} 
+            {{botones?.accion==3?stringRedSocial(botones):''}} 
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        {{'Configurar_atajo' | translate}}:
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Tipo_atajo' | translate}}</ion-label>
+      <ion-select interface="action-sheet" [(ngModel)]="tipo" cancelText="{{'cancelar' | translate}}"
+        okText="{{'hecho' | translate}}">
+        <ion-select-option value="1">{{'Correo' | translate}}</ion-select-option>
+        <ion-select-option value="2">{{'Almacenamiento_nube' | translate}}</ion-select-option>
+        <ion-select-option value="3">{{'Redes_sociales' | translate}}</ion-select-option>
+        <ion-select-option value="4">{{'Agenda' | translate}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!-- Correo -->
+    <ion-item *ngIf="tipo==1">
+      <ion-label position="floating">{{'Correo' | translate}}</ion-label>
+      <ion-input [(ngModel)]="correo"></ion-input>
+    </ion-item>
+    <ion-radio-group *ngIf="tipo==1" [(ngModel)]="tipoSave">
+      <ion-item>
+        <ion-label>{{'Compartir_imagen' | translate}}</ion-label>
+        <ion-radio slot="end" color="tertiary" value="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'Compartir_texto' | translate}}</ion-label>
+        <ion-radio slot="end" color="tertiary" value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'Ambos_Compartir_imagen_texto' | translate}}</ion-label>
+        <ion-radio slot="end" color="tertiary" value="3"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  
+    <ion-item *ngIf="tipo==2">
+      <ion-label position="floating">{{'Conectar_con' | translate}}</ion-label>
+      <ion-select interface="action-sheet" cancelText="{{'cancelar' | translate}}" okText="{{'hecho' | translate}}"
+        [(ngModel)]="tipoNube">
+        <ion-select-option value="1">{{'Google_Drive' | translate}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-radio-group *ngIf="tipo==2 && tipoNube==1" [(ngModel)]="tipoSave">
+      <ion-item>
+        <ion-label>{{'Guardar_como_imagen' | translate}}</ion-label>
+        <ion-radio slot="end" color="tertiary" value="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'Guardar_como_documento' | translate}}</ion-label>
+        <ion-radio slot="end" color="tertiary" value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'Ambos_Como_imagen_documento' | translate}}</ion-label>
+        <ion-radio slot="end" color="tertiary" value="3"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <ion-item *ngIf="tipo==2 && tipoNube==1 && !statusConnectDrive">
+      <ion-button (click)="connectDriveAndroid()" color="dark" size="default">
+        <ion-icon slot="start" name="log-in-outline"></ion-icon>
+        {{'Conectar_Google_Drive' | translate}}
+      </ion-button>
+    </ion-item>
+    <ion-item *ngIf="tipo==2 && tipoNube==1 && statusConnectDrive">
+      <ion-thumbnail slot="start">
+        <ion-img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/1200px-Google_Drive_icon_%282020%29.svg.png">
+        </ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>{{'Conectado_Google_Drive' | translate}}</h3>
+        <p>{{ dataDrive.email }}</p>
+        <p>{{'Ruta_principal' | translate}}: {{ route }}</p>
+        <ion-button size="small" color="primary" fill="outline" (click)="modalDrive()">{{'Cambiar_carpeta' |translate}}</ion-button>
+        <ion-button (click)="logoutGoogle()" color="dark" size="small">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          {{'Desconectar_Google_Drive' | translate}}
+        </ion-button>
+      </ion-label>
+    </ion-item>
+    <!-- Redes sociales -->
+    <ion-item *ngIf="tipo==3">
+      <ion-label position="floating">{{'Tipo_Red_Social' | translate}}</ion-label>
+      <ion-select interface="action-sheet" cancelText="{{'cancelar' | translate}}" okText="{{'hecho' | translate}}" [(ngModel)]="tipoRed">
+        <ion-select-option value="1">{{'WhatsApp' | translate}}</ion-select-option>
+        <ion-select-option value="2">{{'Instagram' | translate}}</ion-select-option>
+        <ion-select-option value="3">{{'Facebook' | translate}}</ion-select-option>
+        <ion-select-option value="4">{{'Twitter' | translate}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-radio-group *ngIf="tipo==3 && tipoRed==1" [(ngModel)]="tipoSave">
+      <ion-item>
+        <ion-label>{{'Compartir_imagen' | translate}}</ion-label>
+        <ion-radio slot="end" color="tertiary" value="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'Compartir_texto' | translate}}</ion-label>
+        <ion-radio slot="end" color="tertiary" value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'Ambos_Compartir_imagen_texto' | translate}}</ion-label>
+        <ion-radio slot="end" color="tertiary" value="3"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  
+    <ion-item *ngIf="tipo==4">
+      <ion-label position="floating">{{'Agregar_agenda' | translate}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button (click)="enviar()" size="default" color="light" expand="block">
+    <ion-icon slot="start" name="save-outline"></ion-icon>
+    {{'Guardar' | translate}}
+  </ion-button>
+</ion-footer>

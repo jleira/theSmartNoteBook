@@ -1,0 +1,74 @@
+<ion-content fullscreen class="ion-padding" scroll-y="false">
+  <ion-slides pager="false" #slidesConfig *ngIf="inicio">
+    <!--Inicio Ingles-->
+    <ion-slide *ngIf="peticiones.idioma==2">
+      <div class="slide">
+        <br>
+        <img src="/assets/login/intro1-.png" />
+        <p>{{'intro_1' | translate}} </p>
+        <div class="my-button">
+          <ion-button expand="block" (click)="nextSlide()">{{'continuar' | translate}}</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+
+ 
+    <ion-slide *ngIf="peticiones.idioma==2">
+      <div class="slide">
+        <br>
+        <img src="/assets/intro/intro2-.png" />
+        <div class="my-button">
+          <p>{{'intro_4' | translate}} 
+          <ion-button expand="block" (click)="setearintro()">{{'continuar' | translate}}</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide *ngIf="peticiones.idioma==2">
+      <div class="slide">
+        <br>
+        <img src="/assets/intro/intro3-.png" />
+        <div class="my-button">
+          <p>{{'intro_3' | translate}}
+          <ion-button expand="block" (click)="setearintro()">{{'continuar' | translate}}</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+
+
+
+    <ion-slide *ngIf="peticiones.idioma==1">
+      <div class="slide">
+        <br>
+        <img src="/assets/intro/intro1.png" />
+        <p>{{'intro_1' | translate}} </p>
+        <div class="my-button">
+          <ion-button expand="block" (click)="nextSlide()">{{'continuar' | translate}}</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+
+
+    <ion-slide *ngIf="peticiones.idioma==1">
+      <div class="slide">
+        <br>
+        <img src="/assets/intro/intro2.png" />
+        <p>{{'intro_2' | translate}} </p>
+        <div class="my-button">
+          <ion-button expand="block" (click)="setearintro()">{{'continuar' | translate}}</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide *ngIf="peticiones.idioma==1">
+      <div class="slide">
+        <br>
+        <img src="/assets/intro/intro3.png" />
+        <p>{{'intro_3' | translate}} </p>
+        <div class="my-button">
+          <ion-button expand="block" (click)="setearintro()">{{'continuar' | translate}}</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

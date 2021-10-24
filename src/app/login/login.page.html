@@ -1,0 +1,65 @@
+<ion-header style="background: #f0f0f0;" class="ion-no-border">
+  <ion-row class="mt7">
+    <ion-col size="10" offset="1">
+      <img style="width: 100%;"  src="/assets/login/logo_preLogin.png">
+    </ion-col>
+  </ion-row>
+
+
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding" (keyup.enter)="loginext()" style="padding-left: 30px; padding-right: 30px;">
+    <ion-item>
+      <ion-label position="floating">{{'CORREO_ELECTRONICO' | translate}}</ion-label>
+      <ion-input type="email" [(ngModel)]="usuarioext.email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'CONTRASENA' | translate}}</ion-label>
+      <ion-input type="password" [(ngModel)]="usuarioext.password"></ion-input>
+    </ion-item>
+    <div class="ion-float-right">
+      <ion-label style="color: #3e3e3e; font-weight: 500;" stacked (click)="peticiones.navegar('recuperarcontrasena');">{{'RECUPERAR_CONTRASENA' | translate}}</ion-label>
+    </div>
+    
+    <div style="margin-top: 42px;">
+      <ion-button size="default" expand="block" style="--background:#494189;" (click)="loginext()">
+        {{'INGRESAR' | translate}}
+      </ion-button>
+    </div>
+    
+    <div style="margin-top: 60px;">
+      
+      <ion-button size="default" *ngIf="isios"  expand="block" (click)="loginIos()" style="--background:black;">
+        <ion-icon slot="start" name="logo-apple"></ion-icon>
+        {{'INGRESAR_IOS' | translate}}
+      </ion-button>
+      <ion-button size="default" class="ion-margin-top" expand="block" (click)="loginGoogleios()" style="--background:#f84932;">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        {{'INGRESAR_GOOGLE' | translate}}
+      </ion-button>
+      <ion-button size="default" class="ion-margin-top" expand="block" (click)="signInfb()" style="--background:#1977F1">
+        <ion-icon slot="start" name="logo-facebook"></ion-icon>
+        {{'INGRESAR_FACEBBOK' | translate}}
+      </ion-button>
+      <br>
+      <a href="https://www.thesmartnotebook.com/">
+        Terminos y condiciones
+      </a>
+    </div>
+
+  </div>
+
+
+
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <div class="containerfooter">
+      <img src="/assets/login/footer.png"style="margin-bottom: -5px;background-color: #f0f0f0;">
+      <div class="centeredfooter">
+        
+      </div>
+    </div>
+</ion-footer>

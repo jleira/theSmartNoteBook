@@ -1,0 +1,29 @@
+
+
+<ion-content fullscreen="true" scroll-y="false">
+  <ion-row class="mt7">
+    <ion-col size="10" offset="1">
+      <img style="width: 100%;"  src="/assets/login/logo_preLogin.png">
+    </ion-col>
+  </ion-row>
+
+  
+
+  <ion-row>
+    <ion-col size="10" offset="1">
+      <h6 style="text-align: center;color:#F0F0F0">
+        {{'msj_prelogin' | translate}}
+      </h6>
+    </ion-col>
+  </ion-row>
+  
+  <div style="width: 100%;position: absolute;bottom: 10%;">
+    <ion-button expand="block"  class="botonstyleqr" (click)="leerQr()" >
+      {{'LEER_QR' | translate}}
+    </ion-button>
+    <br>    
+    <ion-button expand="block"  class="botonstyle" (click)="login()">
+      {{'INGRESAR' | translate}}
+    </ion-button>
+  </div>
+</ion-content>

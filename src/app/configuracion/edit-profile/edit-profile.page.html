@@ -1,0 +1,54 @@
+<ion-header translucent>
+  <ion-toolbar style="color:#2c4384;">
+    <ion-title>{{'Editar_perfil' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <ion-list>
+    <ion-list-header lines="full">
+      <ion-label>
+        {{'Actualizar_informacion' | translate}}
+      </ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="floating">{{'Nombre' | translate}}</ion-label>
+      <ion-input [(ngModel)]="dataUser.name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Mi_Cumple' | translate}}</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" min="1930-03-14" max="2021-12-12" [(ngModel)]="dataUser.birthday" cancelText="{{'cancelar' | translate}}" doneText="{{'hecho' | translate}}"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Pais' | translate}}</ion-label>
+      <ion-select placeholder="{{'Seleccione pais' | translate}}" interface="action-sheet" cancelText="{{'cancelar' | translate}}" doneText="{{'hecho' | translate}}" [(ngModel)]="dataUser.id_pais">
+        <ion-select-option *ngFor="let item of departamentos" [value]="item.id_departamento">{{item.departamento}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Ciudad' | translate}}</ion-label>
+      <ion-input [(ngModel)]="dataUser.ciudad" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Perfil' | translate}}</ion-label>
+      <ion-select placeholder="{{'Seleccione perfil' | translate}}" interface="action-sheet" cancelText="{{'cancelar' | translate}}" doneText="{{'hecho' | translate}}" [(ngModel)]="dataUser.profile">
+        <ion-select-option *ngFor="let item of profiles" [value]="item.id">{{ item.name | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="dataUser.profile==5">
+      <ion-label position="floating">{{'Nombre otro' | translate}}</ion-label>
+      <ion-input [(ngModel)]="dataUser.otro" type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class="ion-text-center">
+    <ion-button (click)="submit()" size="default" color="light" expand="block">
+      <ion-icon slot="start" name="md-edit"></ion-icon>
+      {{'Actualizar' | translate}}
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="color:#2c4384;">
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon style="font-size: 25px;" slot="icon-only" md="arrow-back-outline" ios="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="font-weight: 700;">
+      <img style="height: 30px;" src="/assets/login/logo_preLogin.png">
+    </ion-title>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <ion-card-content>
+      
+      <ion-list lines="full" class="ion-no-margin">
+        <ion-item *ngIf="calendar_array.length != 0">
+          <ion-label>{{'Agendamiento' | translate}}:</ion-label>
+          <ion-select value="scheduling" interface="action-sheet" cancelText="Cancelar" (ionChange)="changeScheduling($event.target.value)">
+            <ion-select-option *ngFor="let data of calendar_array; let i = index" [value]="i">{{ data.title }} - {{ data.hour }}</ion-select-option>
+            <ion-select-option value="other">{{'Otro' | translate}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'titulo' | translate}}:</ion-label>
+          <ion-input [(ngModel)]="titulo" placeholder="{{'Escribir_titulo' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'Fecha_Inicio' | translate}}</ion-label>
+          <ion-datetime displayFormat="D MMM YYYY H:mm" min="2020" max="2024" [(ngModel)]="mydate" [value]="mydate" cancelText="{{'cancelar' | translate}}" doneText="{{'hecho' | translate}}"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'Fecha_Fin' | translate}}</ion-label>
+          <ion-datetime displayFormat="D MMM YYYY H:mm" min="2020" max="2024" [(ngModel)]="mydatef" [value]="mydatef" cancelText="{{'cancelar' | translate}}" doneText="{{'hecho' | translate}}"></ion-datetime>
+        </ion-item>
+      </ion-list>
+      <ion-button (click)="agendar()" expand="full" fill="outline">
+        <ion-icon name="edit"> </ion-icon>
+        {{'Agendar' | translate}}
+      </ion-button>
+    </ion-card-content>
+
+
+</ion-content>
+
+  <!-- 
+
+
+  <ion-item>
+    <ion-label position="floating">Notas</ion-label>
+    <ion-input [(ngModel)]="notes"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">localizacion</ion-label>
+    <ion-input [(ngModel)]="localizacion"></ion-input>
+  </ion-item>
+    
+  <ion-item>
+    <ion-label position="floating">id</ion-label>
+    <ion-input [(ngModel)]="id"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Opciones</ion-label>
+    <ion-select placeholder="Opciones" [(ngModel)]="opcion">
+      <ion-select-option *ngFor="let item of [0,1,2,3,4,5,6,7,8,9,10]" [value]="item">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  
+  <ion-item>
+    <ion-label position="floating">Fecha Inicio</ion-label>
+    <ion-datetime displayFormat="D MMM YYYY H:mm" min="2020" max="2022" [(ngModel)]="mydate" ></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Fecha Fin</ion-label>
+    <ion-datetime displayFormat="D MMM YYYY H:mm" min="2020" max="2022" [(ngModel)]="mydatef"  ></ion-datetime>
+  </ion-item>
+
+
+  <br>
+
+  <ion-input placeholder="Nombre de la imagen" [(ngModel)]="name"></ion-input>
+  <ion-button (click)="crearporopcion()" expand="full" fill="outline">
+    <ion-icon name="edit"> </ion-icon>
+    cargar opcion
+  </ion-button>
+
+
+ -->

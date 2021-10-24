@@ -1,0 +1,36 @@
+ion-content{
+    --background: #fff url('../../assets/login/Fondo.png') no-repeat center center / cover;
+    --padding-top:5%;
+    
+}
+.my-button{
+    position: fixed;
+    bottom: 10%;
+    text-align: center; 
+    width: auto;
+}
+.botonstyle{
+    width: 84%;
+    margin-left: 8%;
+    --border-style:solid;
+    --border-width:1px;
+    --border-radius:10px;
+    --background:transparent !important;
+    --border-color:#F0F0F0;
+    --color:#F0F0F0;
+    
+}
+
+.botonstyleqr{
+    width: 84%;
+    margin-left: 8%;
+    --background:#AD0D72 !important;
+    --border-color:white;
+    --color:#F0F0F0;   
+    --border-radius:10px;
+
+}
+
+.mt7{
+    margin-top: 7rem;
+}

@@ -1,0 +1,111 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="color:#2c4384;">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-weight: 700;" >
+      <img style="height: 30px;" src="/assets/login/logo_preLogin.png">
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="peticiones.navegar('/configuracion')">
+        <ion-icon style="font-size: 25px;" slot="icon-only" ios="ios-profile" md="md-profile"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card style="background: white;">
+    <ion-card-header style="padding-bottom: 0;">
+      <ion-button style="position: absolute;right: 0;margin-right: 15px;z-index: 10;" size="small" fill="clear" (click)="shareSocialMedia()">
+        <ion-icon slot="icon-only" name="share-social-outline" style="color: #483E85;"></ion-icon>
+      </ion-button>
+      <ion-card-title style="font-size: 18px; padding: 0;"  color="verde"  (click)="editPage(true)">{{detailpage?.name}}</ion-card-title>
+      <ion-card-subtitle>{{detailpage?.created_at?.substring(0,10)}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row *ngIf="!statusEditOCR"> 
+        <ion-col class="ion-text-start">
+          <ion-button size="small" fill="clear" (click)="editPage(true)">
+            <ion-icon slot="start" name="md-edit"></ion-icon>
+            {{'Editar' | translate}}
+          </ion-button>
+          <ion-button color="danger" size="small" fill="clear" (click)="deletePage()">
+            <ion-icon slot="start" name="trash-outline"></ion-icon>
+            {{'Eliminar' | translate}}
+          </ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <img [src]="detailpage?.url_image+detailpage?.image" onerror="this.src='/assets/sample-placeholder.png'" (click)="preview(detailpage?.url_image+detailpage?.image)" />
+        </ion-col>
+        <ion-col size="12">
+          <ion-button color="tertiary" size="default" expand="block" fill="clear" (click)="editOCR()">
+            <ion-icon slot="start" name="document-text-outline"></ion-icon>
+            {{'Editar_OCR_generado' | translate}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="statusEditOCR" style="background: white;">
+    <ion-card-content>
+      <ion-row> 
+        <ion-col size="12">
+          <ion-label position="floating">{{'Modificar_texto_OCR' | translate}}</ion-label>
+          <ion-textarea [(ngModel)]="modelTextOCR" rows="10" placeholder="Texto OCR generado"></ion-textarea>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button size="default" fill="clear" (click)="saveTextOCR()">
+            <ion-icon slot="start" name="checkmark-outline"></ion-icon>
+            {{'Guardar' | translate}}
+          </ion-button>
+          <ion-button color="danger" size="default" fill="clear" (click)="cancelTextOCR()">
+            <ion-icon slot="start" name="close-outline"></ion-icon>
+            {{'cancelar' | translate}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+
+
+  
+  <ion-fab *ngIf="botones.length == 0" horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="addAtajo()" color="segundario" size="large">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab *ngIf="botones.length != 0" horizontal="end" vertical="bottom" slot="fixed" >
+    <ion-fab-button color="segundario" size="large">
+      <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+
+      <ion-fab-button *ngFor="let item of botones" (click)="enviarimagen(item.accion,item.email,item)" color="segundario" [attr.data-desc]="stringAccion(item)" size="undefined">
+        <ion-icon name="{{boton(item.button)}}" style="font-size: 25px;"></ion-icon>
+      </ion-fab-button>
+
+<!--       <ion-fab-button color="segundario">
+        <ion-icon name="md-reloj" ></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button color="segundario">
+        <ion-icon   name="md-foco"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button color="segundario">
+        <ion-icon  name="md-diamante"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button color="segundario">
+        <ion-icon name="md-estrella" ></ion-icon>
+      </ion-fab-button>
+ -->
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
